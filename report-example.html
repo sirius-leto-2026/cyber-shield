@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Отчёт безопасности — Cyber-Shield</title>
+<style>
+:root { --navy:#13233f; --cyan:#076a86; --ink:#18202c; --muted:#4f5968; --line:#d3e1ea; --bg:#f4f7fa;
+        --red:#b3261e; --red-bg:#fdecea; --yel:#8a5a00; --yel-bg:#fff4d6; --grn:#17663f; --grn-bg:#e5f5ec; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Segoe UI", Arial, sans-serif; color:var(--ink); background:var(--bg); line-height:1.45; font-size:16px; }
+header { background:var(--navy); color:#fff; padding:22px 16px; }
+header .in, main { max-width:980px; margin:0 auto; }
+header h1 { margin:0 0 4px; font-size:26px; }
+header p { margin:0; color:#cfe9f3; }
+main { padding:16px; }
+h2 { color:var(--navy); margin:28px 0 10px; font-size:21px; }
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+.tile { background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; }
+.tile b { display:block; font-size:28px; color:var(--navy); }
+.tile.r { border-left:6px solid var(--red); } .tile.y { border-left:6px solid #d98a00; } .tile.g { border-left:6px solid var(--grn); }
+.passport { background:#fff; border:1px solid var(--line); border-left:6px solid var(--cyan); border-radius:8px; padding:12px 16px; margin-top:12px; }
+.dev { background:#fff; border:1px solid var(--line); border-radius:8px; margin:12px 0; overflow:hidden; }
+.dev-h { display:flex; gap:14px; align-items:center; padding:12px 16px; flex-wrap:wrap; }
+.light { width:22px; height:22px; border-radius:50%; flex:none; }
+.light.red { background:var(--red); } .light.yellow { background:#e0a100; } .light.green { background:#23a35a; }
+.dev-h .t { font-weight:700; font-size:18px; color:var(--navy); }
+.dev-h .meta { color:var(--muted); font-size:14px; }
+.badge { font-size:13px; font-weight:700; padding:3px 9px; border-radius:20px; margin-left:auto; }
+.badge.red { background:var(--red-bg); color:var(--red); } .badge.yellow { background:var(--yel-bg); color:var(--yel); } .badge.green { background:var(--grn-bg); color:var(--grn); }
+.ports { padding:0 16px 10px; font-size:14px; color:var(--muted); }
+.ports code { background:var(--bg); padding:1px 6px; border-radius:4px; color:var(--ink); }
+.risk { border-top:1px solid var(--line); padding:10px 16px; }
+.risk summary { cursor:pointer; font-weight:600; }
+.risk summary:focus-visible, input:focus-visible { outline:3px solid var(--cyan); outline-offset:2px; }
+.lvl { font-size:12px; font-weight:700; padding:2px 7px; border-radius:4px; margin-right:6px; }
+.lvl.high { background:var(--red-bg); color:var(--red); } .lvl.medium { background:var(--yel-bg); color:var(--yel); } .lvl.low { background:var(--grn-bg); color:var(--grn); }
+.risk ol { margin:6px 0; padding-left:22px; }
+.refs { font-size:13px; color:var(--muted); }
+.refs a { color:var(--cyan); }
+.check { background:#fff; border:1px solid var(--line); border-radius:8px; padding:4px 16px; }
+.check .q { border-bottom:1px solid var(--line); padding:10px 0; }
+.check .q:last-child { border-bottom:none; }
+.check label { display:flex; gap:10px; align-items:flex-start; font-weight:600; cursor:pointer; }
+.check input { width:20px; height:20px; margin-top:3px; flex:none; }
+.check details { margin:4px 0 0 30px; font-size:15px; }
+footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px; color:var(--muted); }
+@media print { body { background:#fff; } details { display:block; } details > *:not(summary) { display:block; } }
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>Отчёт безопасности домашней сети</h1>
+  <p>Cyber-Shield · сеть 127.42.0.0/27 · 18.11.2026 14:01 · проверка заняла 13.0 с</p>
+</div></header>
+<main>
+  <div class="tiles" role="list">
+    <div class="tile" role="listitem"><b>20</b>устройств найдено</div>
+    <div class="tile r" role="listitem"><b>6</b>требуют срочных мер</div>
+    <div class="tile y" role="listitem"><b>6</b>стоит поправить</div>
+    <div class="tile g" role="listitem"><b>8</b>в порядке</div>
+  </div>
+
+  
+  <div class="passport">
+    <b>Проверка на учебном стенде:</b> заложено проблем — 28, найдено — 26
+    (93 %).
+    Цель «не менее 90 %» достигнута.
+    <br>Пропущено: 127.42.0.10 (M01), 127.42.0.10 (M03)
+  </div>
+  
+
+  <h2>Устройства</h2>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.10">
+    <div class="dev-h">
+      <span class="light red" role="img" aria-label="красный сигнал"></span>
+      <div>
+        <div class="t">Роутер</div>
+        <div class="meta">IP 127.42.0.10 · MAC 34:F7:16:5A:00:0A · TP-LINK TECHNOLOGIES CO.,LTD.</div>
+      </div>
+      <span class="badge red">Срочно</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>23</code> <code>80</code> <code>7547</code> <code>49152</code> 
+       · отвечает на UPnP · веб-сервер «Boa/0.94.14rc21»
+    </div>
+    
+    <details class="risk" open>
+      <summary><span class="lvl high">ВЫСОКИЙ</span>Открыт Telnet</summary>
+      <p>Telnet передаёт логин и пароль открытым текстом. Через Telnet с заводскими паролями ботнет Mirai захватил сотни тысяч камер и роутеров.</p>
+      <b>Что сделать:</b>
+      <ol><li>Откройте веб-настройки устройства: наберите в браузере его IP-адрес из отчёта.</li><li>Найдите раздел «Система», «Администрирование» или «Сервисы».</li><li>Выключите Telnet. Если нужен удалённый доступ — используйте SSH.</li><li>Запустите проверку ещё раз.</li></ol>
+      <div class="refs">R01 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a>, <a href="https://owasp.org/www-project-internet-of-things/" target="_blank" rel="noopener">OWASP IoT Top 10: I2</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт порт удалённого управления провайдера TR-069</summary>
+      <p>Через TR-069 провайдер настраивает роутер. В 2016 г. ошибка в этой службе роутеров Eir D1000 позволила массово заражать их через интернет.</p>
+      <b>Что сделать:</b>
+      <ol><li>Обновите прошивку роутера.</li><li>Уточните у провайдера, нужен ли TR-069; если нет — выключите его в настройках (раздел «Удалённое управление» / «TR-069» / «CWMP»).</li></ol>
+      <div class="refs">R04 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10372" target="_blank" rel="noopener">CVE-2016-10372</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Включён UPnP</summary>
+      <p>UPnP позволяет любой программе в сети самой открывать порты на роутере наружу — без вашего ведома. Уязвимость CallStranger в UPnP использовалась для DDoS-атак.</p>
+      <b>Что сделать:</b>
+      <ol><li>На роутере: найдите раздел «UPnP» (обычно «Сеть» → «NAT» или «Дополнительно»).</li><li>Выключите UPnP.</li><li>Если после этого перестала работать игровая приставка — откройте для неё нужный порт вручную.</li></ol>
+      <div class="refs">R05 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2020-12695" target="_blank" rel="noopener">CVE-2020-12695</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Веб-сервер Boa — больше не поддерживается</summary>
+      <p>Сервер Boa не обновляется с 2005 года, но до сих пор встречается в роутерах и камерах. Исправлений уязвимостей для него не будет.</p>
+      <b>Что сделать:</b>
+      <ol><li>Проверьте, есть ли новая прошивка у производителя.</li><li>Если нет — вынесите устройство в гостевую сеть или замените его.</li></ol>
+      <div class="refs">R20 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/1104.html" target="_blank" rel="noopener">CWE-1104</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Открыт служебный порт UPnP</summary>
+      <p>На этих портах работает служба UPnP или встроенный веб-сервер устройства. Чем меньше открытых служб, тем меньше возможностей для атаки.</p>
+      <b>Что сделать:</b>
+      <ol><li>Если UPnP не нужен — выключите его в настройках устройства.</li><li>Обновите прошивку.</li></ol>
+      <div class="refs">R06 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2020-12695" target="_blank" rel="noopener">CVE-2020-12695</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.11">
+    <div class="dev-h">
+      <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
+      <div>
+        <div class="t">IP-камера</div>
+        <div class="meta">IP 127.42.0.11 · MAC 0C:75:D2:5A:01:0B · Hangzhou Hikvision Digital Technology Co.,Ltd.</div>
+      </div>
+      <span class="badge yellow">Поправить</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>554</code> <code>8000</code> 
+       · веб-сервер «App-webs/»
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт видеопоток RTSP</summary>
+      <p>По RTSP камера отдаёт видео. У многих камер просмотр по RTSP возможен без пароля или с заводским паролем.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках камеры включите обязательную авторизацию для RTSP.</li><li>Смените заводской пароль камеры.</li><li>Убедитесь, что на роутере нет переадресации порта 554 в интернет.</li></ol>
+      <div class="refs">R07 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Камера Hikvision: проверьте версию прошивки</summary>
+      <p>В старых прошивках камер Hikvision найдены критические уязвимости: обход авторизации и выполнение команд без пароля.</p>
+      <b>Что сделать:</b>
+      <ol><li>Узнайте версию прошивки в веб-настройках камеры («Конфигурация» → «Система»).</li><li>Скачайте свежую прошивку только с официального сайта и обновите камеру.</li><li>Смените заводской пароль.</li></ol>
+      <div class="refs">R11 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2017-7921" target="_blank" rel="noopener">CVE-2017-7921</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-36260" target="_blank" rel="noopener">CVE-2021-36260</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.12">
+    <div class="dev-h">
+      <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
+      <div>
+        <div class="t">IP-камера</div>
+        <div class="meta">IP 127.42.0.12 · MAC 74:C9:29:5A:02:0C · Zhejiang Dahua Technology Co., Ltd.</div>
+      </div>
+      <span class="badge yellow">Поправить</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>554</code> <code>37777</code> 
+       · веб-сервер «Webs»
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт видеопоток RTSP</summary>
+      <p>По RTSP камера отдаёт видео. У многих камер просмотр по RTSP возможен без пароля или с заводским паролем.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках камеры включите обязательную авторизацию для RTSP.</li><li>Смените заводской пароль камеры.</li><li>Убедитесь, что на роутере нет переадресации порта 554 в интернет.</li></ol>
+      <div class="refs">R07 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт служебный порт камер Dahua (37777)</summary>
+      <p>Через этот порт работают программы просмотра Dahua. В ряде прошивок была уязвимость обхода авторизации.</p>
+      <b>Что сделать:</b>
+      <ol><li>Обновите прошивку камеры/регистратора с официального сайта.</li><li>Не пробрасывайте порт 37777 в интернет; для удалённого просмотра используйте облако производителя или VPN.</li></ol>
+      <div class="refs">R12 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-33044" target="_blank" rel="noopener">CVE-2021-33044</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.13">
+    <div class="dev-h">
+      <span class="light red" role="img" aria-label="красный сигнал"></span>
+      <div>
+        <div class="t">Устройство SHENZHEN BILIAN ELECTRONIC</div>
+        <div class="meta">IP 127.42.0.13 · MAC 20:32:33:5A:03:0D · SHENZHEN BILIAN ELECTRONIC CO.，LTD</div>
+      </div>
+      <span class="badge red">Срочно</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>2323</code> 
+       · веб-сервер «GoAhead-Webs»
+    </div>
+    
+    <details class="risk" open>
+      <summary><span class="lvl high">ВЫСОКИЙ</span>Открыт Telnet на нестандартном порту 2323</summary>
+      <p>Порт 2323 — запасной Telnet, который часто оставляют в дешёвых камерах и видеорегистраторах. Его тоже сканируют ботнеты.</p>
+      <b>Что сделать:</b>
+      <ol><li>Обновите прошивку устройства с сайта производителя.</li><li>Если порт остался открыт — отключите устройство от сети и обратитесь в поддержку производителя.</li></ol>
+      <div class="refs">R02 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Устаревший встроенный веб-сервер GoAhead</summary>
+      <p>Веб-сервер GoAhead встречается в дешёвых камерах. В старых версиях есть уязвимость удалённого выполнения команд.</p>
+      <b>Что сделать:</b>
+      <ol><li>Обновите прошивку устройства.</li><li>Если производитель больше не выпускает обновлений — замените устройство или вынесите его в гостевую сеть.</li></ol>
+      <div class="refs">R19 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2017-17562" target="_blank" rel="noopener">CVE-2017-17562</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.14">
+    <div class="dev-h">
+      <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
+      <div>
+        <div class="t">Умное устройство (розетка, датчик)</div>
+        <div class="meta">IP 127.42.0.14 · MAC D4:8A:FC:5A:04:0E · Espressif Inc.</div>
+      </div>
+      <span class="badge yellow">Поправить</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>1883</code> 
+      
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>MQTT без шифрования</summary>
+      <p>MQTT — протокол «умного дома». На порту 1883 сообщения идут открытым текстом и часто без пароля: любой в сети может включать и выключать устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках хаба умного дома включите вход по логину и паролю.</li><li>По возможности перейдите на MQTT с TLS (порт 8883).</li></ol>
+      <div class="refs">R08 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a>, <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.15">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Умное устройство (розетка, датчик)</div>
+        <div class="meta">IP 127.42.0.15 · MAC D4:8A:FC:5A:05:0F · Espressif Inc.</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> 
+      
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.16">
+    <div class="dev-h">
+      <span class="light red" role="img" aria-label="красный сигнал"></span>
+      <div>
+        <div class="t">Одноплатный компьютер</div>
+        <div class="meta">IP 127.42.0.16 · MAC D8:3A:DD:5A:06:10 · Raspberry Pi Trading Ltd</div>
+      </div>
+      <span class="badge red">Срочно</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>21</code> <code>22</code> <code>5900</code> 
+      
+    </div>
+    
+    <details class="risk" open>
+      <summary><span class="lvl high">ВЫСОКИЙ</span>Открыт удалённый экран VNC</summary>
+      <p>Через VNC видно и можно управлять экраном устройства. Нередко его оставляют вовсе без пароля.</p>
+      <b>Что сделать:</b>
+      <ol><li>Выключите VNC, если он не нужен.</li><li>Если нужен — задайте пароль и разрешите подключение только из своей сети.</li></ol>
+      <div class="refs">R17 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт FTP</summary>
+      <p>FTP передаёт пароль и файлы без шифрования. Часто так открыт доступ к флешке, подключённой к роутеру.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках роутера/устройства найдите «USB-накопитель», «Файловый сервер» или «FTP».</li><li>Выключите FTP или включите вариант с шифрованием (FTPS/SFTP).</li><li>Если доступ нужен — задайте сложный пароль и запретите анонимный вход.</li></ol>
+      <div class="refs">R03 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Открыт SSH на «умном» устройстве</summary>
+      <p>SSH — безопасный протокол, но на мини-компьютерах и роутерах его часто оставляют с заводским паролем (например, pi/raspberry).</p>
+      <b>Что сделать:</b>
+      <ol><li>Смените пароль пользователя по умолчанию.</li><li>Лучше — включите вход по ключу и запретите вход по паролю.</li></ol>
+      <div class="refs">R16 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/1392.html" target="_blank" rel="noopener">CWE-1392</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.17">
+    <div class="dev-h">
+      <span class="light red" role="img" aria-label="красный сигнал"></span>
+      <div>
+        <div class="t">ТВ-приставка / Android</div>
+        <div class="meta">IP 127.42.0.17 · MAC CC:EB:5E:5A:07:11 · Xiaomi Communications Co Ltd</div>
+      </div>
+      <span class="badge red">Срочно</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>5555</code> <code>8443</code> 
+      
+    </div>
+    
+    <details class="risk" open>
+      <summary><span class="lvl high">ВЫСОКИЙ</span>Открыта отладка Android по сети (ADB)</summary>
+      <p>Через ADB можно установить на ТВ-приставку или телефон любую программу без пароля. Так распространялись майнеры на Android-приставках.</p>
+      <b>Что сделать:</b>
+      <ol><li>На приставке откройте «Настройки» → «Для разработчиков».</li><li>Выключите «Отладка по сети» / «ADB по Wi-Fi».</li><li>Если пункта нет — сбросьте приставку к заводским настройкам и обновите её.</li></ol>
+      <div class="refs">R13 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.18">
+    <div class="dev-h">
+      <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
+      <div>
+        <div class="t">Сетевое хранилище</div>
+        <div class="meta">IP 127.42.0.18 · MAC 90:09:D0:5A:08:12 · Synology Incorporated</div>
+      </div>
+      <span class="badge yellow">Поправить</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>21</code> <code>5000</code> 
+       · веб-сервер «nginx»
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт FTP</summary>
+      <p>FTP передаёт пароль и файлы без шифрования. Часто так открыт доступ к флешке, подключённой к роутеру.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках роутера/устройства найдите «USB-накопитель», «Файловый сервер» или «FTP».</li><li>Выключите FTP или включите вариант с шифрованием (FTPS/SFTP).</li><li>Если доступ нужен — задайте сложный пароль и запретите анонимный вход.</li></ol>
+      <div class="refs">R03 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Открыт служебный порт UPnP</summary>
+      <p>На этих портах работает служба UPnP или встроенный веб-сервер устройства. Чем меньше открытых служб, тем меньше возможностей для атаки.</p>
+      <b>Что сделать:</b>
+      <ol><li>Если UPnP не нужен — выключите его в настройках устройства.</li><li>Обновите прошивку.</li></ol>
+      <div class="refs">R06 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2020-12695" target="_blank" rel="noopener">CVE-2020-12695</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.19">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Принтер</div>
+        <div class="meta">IP 127.42.0.19 · MAC 64:4E:D7:5A:09:13 · HP Inc.</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>9100</code> 
+       · веб-сервер «HP HTTP Server»
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Сетевой принтер принимает задания без проверки</summary>
+      <p>Любое устройство в сети может отправить на печать что угодно. Для дома это неопасно, если в Wi-Fi нет чужих.</p>
+      <b>Что сделать:</b>
+      <ol><li>Подключите гостей к гостевой сети, а не к основной.</li><li>Обновите прошивку принтера.</li></ol>
+      <div class="refs">R18 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.20">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Устройство Google</div>
+        <div class="meta">IP 127.42.0.20 · MAC 60:70:6C:5A:0A:14 · Google, Inc.</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>8443</code> 
+      
+    </div>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.21">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Умный свет</div>
+        <div class="meta">IP 127.42.0.21 · MAC C4:29:96:5A:0B:15 · Signify B.V.</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>443</code> 
+       · веб-сервер «nginx»
+    </div>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.22">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Устройство Samsung Electronics</div>
+        <div class="meta">IP 127.42.0.22 · MAC 64:1B:2F:5A:0C:16 · Samsung Electronics Co.,Ltd</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>8080</code> 
+       · веб-сервер «Samsung TV»
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Дополнительная веб-панель на нестандартном порту</summary>
+      <p>Порты 8080/8081 — запасные веб-панели. Их часто забывают закрыть, и они остаются с заводским паролем.</p>
+      <b>Что сделать:</b>
+      <ol><li>Откройте адрес устройства с этим портом (например, http://IP:8080) и проверьте, что это за панель.</li><li>Если она не нужна — выключите её; если нужна — смените пароль.</li></ol>
+      <div class="refs">R10 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/1392.html" target="_blank" rel="noopener">CWE-1392</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.23">
+    <div class="dev-h">
+      <span class="light red" role="img" aria-label="красный сигнал"></span>
+      <div>
+        <div class="t">Компьютер</div>
+        <div class="meta">IP 127.42.0.23 · MAC E4:C7:67:5A:0D:17 · Intel Corporate</div>
+      </div>
+      <span class="badge red">Срочно</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>3389</code> <code>5900</code> 
+      
+    </div>
+    
+    <details class="risk" open>
+      <summary><span class="lvl high">ВЫСОКИЙ</span>Открыт удалённый экран VNC</summary>
+      <p>Через VNC видно и можно управлять экраном устройства. Нередко его оставляют вовсе без пароля.</p>
+      <b>Что сделать:</b>
+      <ol><li>Выключите VNC, если он не нужен.</li><li>Если нужен — задайте пароль и разрешите подключение только из своей сети.</li></ol>
+      <div class="refs">R17 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт удалённый рабочий стол (RDP)</summary>
+      <p>К компьютеру можно подключиться удалённо. На старых системах без обновлений есть уязвимость BlueKeep, позволяющая захватить компьютер без пароля.</p>
+      <b>Что сделать:</b>
+      <ol><li>Если удалённый доступ не нужен — выключите его: «Параметры» → «Система» → «Удалённый рабочий стол».</li><li>Если нужен — установите обновления и задайте сложный пароль.</li></ol>
+      <div class="refs">R15 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-0708" target="_blank" rel="noopener">CVE-2019-0708</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.24">
+    <div class="dev-h">
+      <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
+      <div>
+        <div class="t">Одноплатный компьютер</div>
+        <div class="meta">IP 127.42.0.24 · MAC D8:3A:DD:5A:0E:18 · Raspberry Pi Trading Ltd</div>
+      </div>
+      <span class="badge yellow">Поправить</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>22</code> <code>1883</code> 
+      
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>MQTT без шифрования</summary>
+      <p>MQTT — протокол «умного дома». На порту 1883 сообщения идут открытым текстом и часто без пароля: любой в сети может включать и выключать устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках хаба умного дома включите вход по логину и паролю.</li><li>По возможности перейдите на MQTT с TLS (порт 8883).</li></ol>
+      <div class="refs">R08 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a>, <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Открыт SSH на «умном» устройстве</summary>
+      <p>SSH — безопасный протокол, но на мини-компьютерах и роутерах его часто оставляют с заводским паролем (например, pi/raspberry).</p>
+      <b>Что сделать:</b>
+      <ol><li>Смените пароль пользователя по умолчанию.</li><li>Лучше — включите вход по ключу и запретите вход по паролю.</li></ol>
+      <div class="refs">R16 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/1392.html" target="_blank" rel="noopener">CWE-1392</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.25">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Устройство Beijing Xiaomi Mobile Software</div>
+        <div class="meta">IP 127.42.0.25 · MAC 8C:D0:B2:5A:0F:19 · Beijing Xiaomi Mobile Software Co., Ltd</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> 
+      
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.26">
+    <div class="dev-h">
+      <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
+      <div>
+        <div class="t">IP-камера</div>
+        <div class="meta">IP 127.42.0.26 · MAC D4:8A:FC:5A:10:1A · Espressif Inc.</div>
+      </div>
+      <span class="badge yellow">Поправить</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>80</code> <code>554</code> 
+      
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Открыт видеопоток RTSP</summary>
+      <p>По RTSP камера отдаёт видео. У многих камер просмотр по RTSP возможен без пароля или с заводским паролем.</p>
+      <b>Что сделать:</b>
+      <ol><li>В настройках камеры включите обязательную авторизацию для RTSP.</li><li>Смените заводской пароль камеры.</li><li>Убедитесь, что на роутере нет переадресации порта 554 в интернет.</li></ol>
+      <div class="refs">R07 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/306.html" target="_blank" rel="noopener">CWE-306</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.27">
+    <div class="dev-h">
+      <span class="light red" role="img" aria-label="красный сигнал"></span>
+      <div>
+        <div class="t">Роутер / точка доступа</div>
+        <div class="meta">IP 127.42.0.27 · MAC BC:22:28:5A:11:1B · D-Link International</div>
+      </div>
+      <span class="badge red">Срочно</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>23</code> <code>80</code> 
+       · веб-сервер «Boa/0.94.13»
+    </div>
+    
+    <details class="risk" open>
+      <summary><span class="lvl high">ВЫСОКИЙ</span>Открыт Telnet</summary>
+      <p>Telnet передаёт логин и пароль открытым текстом. Через Telnet с заводскими паролями ботнет Mirai захватил сотни тысяч камер и роутеров.</p>
+      <b>Что сделать:</b>
+      <ol><li>Откройте веб-настройки устройства: наберите в браузере его IP-адрес из отчёта.</li><li>Найдите раздел «Система», «Администрирование» или «Сервисы».</li><li>Выключите Telnet. Если нужен удалённый доступ — используйте SSH.</li><li>Запустите проверку ещё раз.</li></ol>
+      <div class="refs">R01 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a>, <a href="https://owasp.org/www-project-internet-of-things/" target="_blank" rel="noopener">OWASP IoT Top 10: I2</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl medium">СРЕДНИЙ</span>Веб-сервер Boa — больше не поддерживается</summary>
+      <p>Сервер Boa не обновляется с 2005 года, но до сих пор встречается в роутерах и камерах. Исправлений уязвимостей для него не будет.</p>
+      <b>Что сделать:</b>
+      <ol><li>Проверьте, есть ли новая прошивка у производителя.</li><li>Если нет — вынесите устройство в гостевую сеть или замените его.</li></ol>
+      <div class="refs">R20 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/1104.html" target="_blank" rel="noopener">CWE-1104</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Веб-настройки только по HTTP, без HTTPS</summary>
+      <p>Пароль от панели управления передаётся без шифрования. В домашней сети это риск, если к Wi-Fi подключены чужие устройства.</p>
+      <b>Что сделать:</b>
+      <ol><li>Посмотрите в настройках пункт «HTTPS» / «Защищённый доступ» и включите его.</li><li>Не заходите в настройки устройства через гостевой или чужой Wi-Fi.</li></ol>
+      <div class="refs">R09 · Ссылки: <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" rel="noopener">CWE-319</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.28">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Телефон / ноутбук (случайный MAC)</div>
+        <div class="meta">IP 127.42.0.28 · MAC 7A:3C:91:5A:12:1C</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      не найдены
+      
+    </div>
+    
+  </section>
+  
+  <section class="dev" aria-label="Устройство 127.42.0.29">
+    <div class="dev-h">
+      <span class="light green" role="img" aria-label="зелёный сигнал"></span>
+      <div>
+        <div class="t">Устройство Sony Interactive Entertainment</div>
+        <div class="meta">IP 127.42.0.29 · MAC F4:64:12:5A:13:1D · Sony Interactive Entertainment Inc.</div>
+      </div>
+      <span class="badge green">В порядке</span>
+    </div>
+    <div class="ports">Открытые сервисы:
+      <code>49152</code> 
+      
+    </div>
+    
+    <details class="risk">
+      <summary><span class="lvl low">НИЗКИЙ</span>Открыт служебный порт UPnP</summary>
+      <p>На этих портах работает служба UPnP или встроенный веб-сервер устройства. Чем меньше открытых служб, тем меньше возможностей для атаки.</p>
+      <b>Что сделать:</b>
+      <ol><li>Если UPnP не нужен — выключите его в настройках устройства.</li><li>Обновите прошивку.</li></ol>
+      <div class="refs">R06 · Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2020-12695" target="_blank" rel="noopener">CVE-2020-12695</a> · поиск в БДУ ФСТЭК: <a href="https://bdu.fstec.ru/vul" target="_blank" rel="noopener">bdu.fstec.ru</a></div>
+    </details>
+    
+  </section>
+  
+
+  <h2>Проверьте сами (программа это не проверяет)</h2>
+  <p>Cyber-Shield никогда не пытается войти на устройства. Ответьте на вопросы — отметки сохраняются в этом браузере.</p>
+  <div class="check">
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M01"> <span><span class="lvl high">ВЫСОКИЙ</span>Вы меняли пароль входа в настройки роутера (тот, что напечатан на наклейке снизу)?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>Заводские пароли одинаковы у тысяч устройств и опубликованы в интернете.</p>
+        <ol><li>Откройте настройки роутера (обычно http://192.168.0.1 или http://192.168.1.1).</li><li>Раздел «Система» → «Пароль администратора».</li><li>Задайте пароль от 12 символов и запишите его в надёжном месте.</li></ol>
+        <div class="refs">Ссылки: <a href="https://cwe.mitre.org/data/definitions/1392.html" target="_blank" rel="noopener">CWE-1392</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M02"> <span><span class="lvl high">ВЫСОКИЙ</span>У всех камер и устройств умного дома заданы свои пароли, а не заводские?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>Mirai заражал устройства, просто перебирая около 60 заводских паролей.</p>
+        <ol><li>В приложении или веб-настройках каждого устройства смените пароль.</li><li>Не используйте один и тот же пароль везде.</li></ol>
+        <div class="refs">Ссылки: <a href="https://cwe.mitre.org/data/definitions/1392.html" target="_blank" rel="noopener">CWE-1392</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M03"> <span><span class="lvl medium">СРЕДНИЙ</span>Функция WPS (подключение по кнопке или PIN-коду) на роутере выключена?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>PIN-код WPS подбирается за несколько часов, после чего злоумышленник узнаёт пароль Wi-Fi.</p>
+        <ol><li>Настройки роутера → «Wi-Fi» → «WPS».</li><li>Выключите WPS.</li></ol>
+        <div class="refs">Ссылки: <a href="https://nvd.nist.gov/vuln/detail/CVE-2011-5053" target="_blank" rel="noopener">CVE-2011-5053</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M04"> <span><span class="lvl high">ВЫСОКИЙ</span>Доступ к настройкам роутера из интернета («Удалённое управление», «Remote Management») выключен?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>Если панель управления видна из интернета, её непрерывно атакуют подбором паролей.</p>
+        <ol><li>Настройки роутера → «Администрирование» / «Удалённое управление».</li><li>Выключите доступ из WAN/интернета.</li></ol>
+        <div class="refs">Ссылки: <a href="https://owasp.org/www-project-internet-of-things/" target="_blank" rel="noopener">OWASP IoT Top 10: I3</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M05"> <span><span class="lvl medium">СРЕДНИЙ</span>Прошивка роутера обновлялась в последние 12 месяцев (или включено автообновление)?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>Обновления закрывают найденные уязвимости. Роутер без обновлений постепенно становится лёгкой целью.</p>
+        <ol><li>Настройки роутера → «Система» → «Обновление ПО».</li><li>Включите автоматическое обновление, если оно есть.</li></ol>
+        <div class="refs">Ссылки: <a href="https://owasp.org/www-project-internet-of-things/" target="_blank" rel="noopener">OWASP IoT Top 10: I4</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M06"> <span><span class="lvl high">ВЫСОКИЙ</span>В настройках Wi-Fi выбрано шифрование WPA2 или WPA3 (не WEP, не «открытая сеть», не WPA/TKIP)?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>WEP и старый WPA взламываются за минуты; в открытой сети трафик видят все вокруг.</p>
+        <ol><li>Настройки роутера → «Wi-Fi» → «Безопасность».</li><li>Выберите WPA2-PSK (AES) или WPA3.</li><li>Задайте пароль Wi-Fi от 12 символов.</li></ol>
+        <div class="refs">Ссылки: <a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank" rel="noopener">CWE-327</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M07"> <span><span class="lvl low">НИЗКИЙ</span>Камеры, розетки и другие «умные» устройства подключены к отдельной (гостевой) сети Wi-Fi?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>Если такое устройство взломают, из гостевой сети злоумышленник не доберётся до компьютеров и телефонов.</p>
+        <ol><li>Настройки роутера → «Гостевая сеть» — включите её.</li><li>Переподключите «умные» устройства к гостевой сети.</li></ol>
+        <div class="refs">Ссылки: <a href="https://www.etsi.org/deliver/etsi_en/303600_303699/303645/" target="_blank" rel="noopener">ETSI EN 303 645</a></div>
+      </details>
+    </div>
+    
+    <div class="q">
+      <label><input type="checkbox" data-id="M08"> <span><span class="lvl medium">СРЕДНИЙ</span>У камер выключен облачный P2P-доступ (просмотр «из любой точки мира» по серийному номеру), если вы им не пользуетесь?</span></label>
+      <details><summary>Если «нет» — как исправить</summary>
+        <p>P2P-доступ работает через серверы производителя: если у камеры заводской пароль, посмотреть её может любой, кто знает серийный номер.</p>
+        <ol><li>В приложении или веб-настройках камеры найдите «P2P», «Облако», «Hik-Connect»/«EZVIZ», «Easy4IP».</li><li>Выключите, если не пользуетесь; если пользуетесь — задайте сложный пароль и включите двухфакторный вход в приложении.</li></ol>
+        <div class="refs">Ссылки: <a href="https://www.etsi.org/deliver/etsi_en/303600_303699/303645/" target="_blank" rel="noopener">ETSI EN 303 645</a></div>
+      </details>
+    </div>
+    
+  </div>
+</main>
+<footer>
+  Отчёт создан на этом компьютере и никуда не отправлялся. Проверялась только подсеть 127.42.0.0/27, к которой подключён компьютер.
+  Cyber-Shield не заменяет профессиональный аудит: база рисков покрывает типовые проблемы популярных устройств.
+</footer>
+<script>
+document.querySelectorAll('.check input').forEach(function (cb) {
+  var key = 'cyber-shield:' + cb.dataset.id;
+  try { cb.checked = localStorage.getItem(key) === '1'; } catch (e) {}
+  cb.addEventListener('change', function () { try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch (e) {} });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber-Shield</title>
+<style>
+:root{--bg:#f3f6fa;--fg:#14213d;--muted:#55607a;--card:#fff;--accent:#13203a;--warn:#b42318}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 "Segoe UI",system-ui,sans-serif}
+header{background:var(--accent);color:#fff;padding:40px 16px}
+.w{max-width:960px;margin:0 auto;padding:0 16px}
+h1{margin:0 0 6px;font-size:34px}header p{margin:0;color:#b9c8e6}
+section{background:var(--card);border-radius:10px;margin:22px 0;padding:22px;box-shadow:0 1px 3px #0001}
+.legal{border-left:6px solid var(--warn)}
+img{max-width:100%;border-radius:8px;border:1px solid #dde3ee}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.num{font-size:30px;font-weight:700}small{color:var(--muted)}a{color:#1f4fbf}
+</style></head><body>
+<header><div class="w"><h1>Cyber-Shield</h1><p>Сканер безопасности домашней IoT-сети: устройства, рискованные настройки, понятный отчёт со «светофором».</p></div></header>
+<main class="w">
+<section class="legal"><strong>Проверяйте только свою сеть.</strong> Сканировать можно только собственную домашнюю сеть или сеть, владелец которой разрешил проверку (ст. 272 УК РФ). Программа сама ограничивается подсетью своего компьютера, спрашивает подтверждение, не входит на устройства и не подбирает пароли. Все данные остаются на компьютере пользователя, ничего не отправляется в интернет.</section>
+<section><h2>Демо</h2><img src="demo.gif" alt="Анимация: запуск проверки, светофор в консоли, HTML-отчёт, результат после исправления, графики"></section>
+<section><h2>Результаты на учебном стенде (20 виртуальных устройств)</h2>
+<div class="grid"><div><div class="num">92,9 %</div><small>найдено заложенных проблем (26 из 28), цель ≥ 90 %</small></div>
+<div><div class="num">12 с</div><small>проверка 20 устройств, цель < 5 мин</small></div>
+<div><div class="num">20 / 20</div><small>устройств «зелёные» после исправления</small></div></div>
+<p><img src="chart.png" alt="Графики: светофор до и после, доля найденных проблем, время проверки"></p>
+<p><small>Стенд виртуальный (эмулятор сервисов на этом же компьютере). Проверка на реальном оборудовании и на пользователях без технической подготовки ещё впереди.</small></p></section>
+<section><h2>Как выглядит отчёт</h2><div class="grid">
+<img src="cover.png" alt="Отчёт до исправления: красные и жёлтые устройства, шаги «что сделать»">
+<img src="after.png" alt="Отчёт после исправления: все устройства зелёные"></div>
+<p><a href="report-example.html">Открыть пример отчёта целиком</a> (адреса условные, стенд).</p></section>
+<section><h2>Как это работает</h2><ol><li>Определяет свою подсеть и отказывает для чужих и публичных адресов.</li><li>Находит устройства, открытые сервисы и производителя по MAC.</li><li>Сверяет с базой из 28 рисков со ссылками на CVE, БДУ ФСТЭК и OWASP.</li><li>Делает HTML-отчёт: «светофор» и пошаговые советы простым языком.</li></ol></section>
+</main></body></html>
