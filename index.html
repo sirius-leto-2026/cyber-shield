@@ -1,31 +1,293 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cyber-Shield</title>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber-Shield — сканер безопасности домашней IoT-сети</title>
+<meta name="description" content="Cyber-Shield — учебный сканер домашней IoT-сети: находит устройства и рискованные настройки, объясняет, что исправить, и делает HTML-отчёт со «светофором».">
+<meta name="theme-color" content="#13233f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2313233f'/%3E%3Cpath d='M16 5l8 3v7c0 5.2-3.4 9.3-8 11-4.6-1.7-8-5.8-8-11V8z' fill='%23e7eefc'/%3E%3Cpath d='M12.2 16.4l2.7 2.7 5.2-5.6' stroke='%2313233f' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Cyber-Shield">
+<meta property="og:title" content="Cyber-Shield — сканер безопасности домашней IoT-сети">
+<meta property="og:description" content="Находит устройства и рискованные настройки в домашней сети, объясняет, что исправить, и делает HTML-отчёт со «светофором».">
+<meta property="og:url" content="https://sirius-leto-2026.github.io/cyber-shield/">
+<meta property="og:image" content="https://sirius-leto-2026.github.io/cyber-shield/cover.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="1600">
+<meta property="og:image:alt" content="Отчёт Cyber-Shield: светофор устройств домашней сети и список найденных рисков">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-:root{--bg:#f3f6fa;--fg:#14213d;--muted:#55607a;--card:#fff;--accent:#13203a;--warn:#b42318}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 "Segoe UI",system-ui,sans-serif}
-header{background:var(--accent);color:#fff;padding:40px 16px}
-.w{max-width:960px;margin:0 auto;padding:0 16px}
-h1{margin:0 0 6px;font-size:34px}header p{margin:0;color:#b9c8e6}
-section{background:var(--card);border-radius:10px;margin:22px 0;padding:22px;box-shadow:0 1px 3px #0001}
+:root{--bg:#f4f7fa;--fg:#18202c;--muted:#4f5968;--card:#fff;--navy:#13233f;--line:#d3e1ea;--link:#1f4fbf;--warn:#b3261e;--cyan:#076a86;--r:10px;--maxw:960px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 "Segoe UI",system-ui,Arial,sans-serif}
+.w{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration:none}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:5px}
+header{background:var(--navy);color:#fff;padding:34px 16px 28px}
+header h1{margin:0 0 8px;font-size:clamp(26px,5vw,34px);line-height:1.15;letter-spacing:-.01em}
+header .lead{margin:0;color:#c6d8f2;max-width:62ch}
+nav.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.jump a{color:#dbe7f8;text-decoration:none;font-size:14px;padding:5px 11px;border:1px solid #ffffff33;border-radius:999px}
+nav.jump a:hover{background:#ffffff1a;border-color:#ffffff66}
+main{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+section{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin:20px 0;padding:22px;box-shadow:0 1px 3px #0b152610}
+section h2{margin:0 0 12px;font-size:22px;line-height:1.25;color:var(--navy)}
+section p{margin:0 0 12px}
+section p:last-child{margin-bottom:0}
+small{color:var(--muted)}
+.mt{margin-top:16px}
 .legal{border-left:6px solid var(--warn)}
-img{max-width:100%;border-radius:8px;border:1px solid #dde3ee}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.num{font-size:30px;font-weight:700}small{color:var(--muted)}a{color:#1f4fbf}
-</style></head><body>
-<header><div class="w"><h1>Cyber-Shield</h1><p>Сканер безопасности домашней IoT-сети: устройства, рискованные настройки, понятный отчёт со «светофором».</p></div></header>
-<main class="w">
-<section class="legal"><strong>Проверяйте только свою сеть.</strong> Сканировать можно только собственную домашнюю сеть или сеть, владелец которой разрешил проверку (ст. 272 УК РФ). Программа сама ограничивается подсетью своего компьютера, спрашивает подтверждение, не входит на устройства и не подбирает пароли. Все данные остаются на компьютере пользователя, ничего не отправляется в интернет.</section>
-<section><h2>Демо</h2><img src="demo.gif" alt="Анимация: запуск проверки, светофор в консоли, HTML-отчёт, результат после исправления, графики"></section>
-<section><h2>Результаты на учебном стенде (20 виртуальных устройств)</h2>
-<div class="grid"><div><div class="num">92,9 %</div><small>найдено заложенных проблем (26 из 28), цель ≥ 90 %</small></div>
-<div><div class="num">12 с</div><small>проверка 20 устройств, цель < 5 мин</small></div>
-<div><div class="num">20 / 20</div><small>устройств «зелёные» после исправления</small></div></div>
-<p><img src="chart.png" alt="Графики: светофор до и после, доля найденных проблем, время проверки"></p>
-<p><small>Стенд виртуальный (эмулятор сервисов на этом же компьютере). Проверка на реальном оборудовании и на пользователях без технической подготовки ещё впереди.</small></p></section>
-<section><h2>Как выглядит отчёт</h2><div class="grid">
-<img src="cover.png" alt="Отчёт до исправления: красные и жёлтые устройства, шаги «что сделать»">
-<img src="after.png" alt="Отчёт после исправления: все устройства зелёные"></div>
-<p><a href="report-example.html">Открыть пример отчёта целиком</a> (адреса условные, стенд).</p></section>
-<section><h2>Как это работает</h2><ol><li>Определяет свою подсеть и отказывает для чужих и публичных адресов.</li><li>Находит устройства, открытые сервисы и производителя по MAC.</li><li>Сверяет с базой из 28 рисков со ссылками на CVE, БДУ ФСТЭК и OWASP.</li><li>Делает HTML-отчёт: «светофор» и пошаговые советы простым языком.</li></ol></section>
-</main></body></html>
+.legal p{margin:0;max-width:80ch}
+.cards,.flow,.stats{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.cards{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.flow{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.stats{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.card,.flow li,.stat{background:#fbfdff;border:1px solid var(--line);border-radius:var(--r)}
+.card{padding:14px 16px}
+.card h3{margin:0 0 6px;font-size:16px;color:var(--navy)}
+.card p{margin:0;font-size:15px;color:var(--muted);line-height:1.5}
+.flow li{padding:14px 16px 16px}
+.flow li b{display:block;margin-bottom:4px;color:var(--navy);font-size:16px}
+.flow li span{display:block;font-size:15px;color:var(--muted);line-height:1.5}
+.stat{padding:14px 16px}
+.num{display:block;font-size:30px;line-height:1.1;font-weight:700;color:var(--navy)}
+.stat small{display:block;margin-top:5px;font-size:14px;line-height:1.45;color:var(--muted)}
+.shots-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+figure{margin:0}
+figcaption{font-size:14px;line-height:1.5;color:var(--muted);margin-top:8px}
+.zoom{position:relative;display:block;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+.zoom img{display:block;width:100%;height:auto}
+.zoom-tag{position:absolute;top:8px;right:8px;background:#13233fd9;color:#fff;font-size:12px;line-height:1;padding:6px 9px;border-radius:999px}
+.zoom:hover .zoom-tag,.zoom:focus-visible .zoom-tag{background:#076a86}
+.btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;padding:11px 18px;border-radius:var(--r)}
+.btn:hover{background:#1b3a6b}
+code,.cmd{font-family:Consolas,ui-monospace,"Courier New",monospace}
+.cmd{margin:0;background:#0f1b2f;color:#e7eefc;border-radius:var(--r);padding:12px 14px;font-size:14px;line-height:1.5;overflow-x:auto}
+.facts{margin:0 0 14px;padding-left:20px}
+.facts li{margin:0 0 8px}
+.facts li:last-child{margin-bottom:0}
+footer{max-width:var(--maxw);margin:0 auto;padding:6px 16px 36px;font-size:14px;line-height:1.6;color:var(--muted)}
+footer p{margin:0 0 6px}
+.lb{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;gap:10px;padding:12px;background:#0b1526}
+.lb[hidden]{display:none}
+.lb-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.lb-title{margin:0;flex:1 1 220px;min-width:0;font-size:14px;line-height:1.4;color:#dbe7f8}
+.lb-actions{display:flex;flex:none;gap:8px}
+.lb-btn{background:#ffffff1f;border:1px solid #ffffff59;color:#fff;font:inherit;font-size:14px;padding:7px 13px;border-radius:999px;cursor:pointer}
+.lb-btn:hover{background:#ffffff33}
+.lb-btn[aria-pressed="true"]{background:#4cc2e8;border-color:#4cc2e8;color:#0b1526}
+.lb-body{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;border-radius:8px}
+.lb-img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:8px;background:#fff}
+.lb-body.actual{align-items:flex-start;justify-content:flex-start}
+.lb-body.actual .lb-img{max-width:none;max-height:none}
+body.lb-open{overflow:hidden}
+@media (max-width:520px){
+  header{padding:26px 16px 22px}
+  section{padding:18px 16px}
+  section h2{font-size:20px}
+  .btn{display:block;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <div class="w">
+    <h1>Cyber-Shield</h1>
+    <p class="lead">Сканер безопасности домашней IoT-сети: устройства, рискованные настройки, понятный отчёт со «светофором».</p>
+    <nav class="jump" aria-label="Разделы страницы">
+      <a href="#problem">Проблема</a>
+      <a href="#what">Что делает</a>
+      <a href="#how">Как работает</a>
+      <a href="#report">Пример отчёта</a>
+      <a href="#result">Результат</a>
+      <a href="#stack">Стек</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="legal">
+    <p><strong>Проверяйте только свою сеть.</strong> Сканировать можно только собственную домашнюю сеть или сеть, владелец которой разрешил проверку (ст. 272 УК РФ). Программа сама ограничивается подсетью своего компьютера, спрашивает подтверждение, не входит на устройства и не подбирает пароли. Все данные остаются на компьютере пользователя, ничего не отправляется в интернет.</p>
+  </section>
+
+  <section id="problem">
+    <h2>Проблема</h2>
+    <p>В домашней сети десятки подключённых устройств: роутер, IP-камеры, умные розетки, принтер, телевизор, мини-компьютер. Каждое открывает свои сетевые сервисы, и не все из них безопасны. Человеку без технической подготовки трудно понять, что именно доступно в его сети и что с этим делать.</p>
+    <p>На учебном стенде такими находками стали открытый Telnet на роутере, включённый UPnP, видеопоток RTSP у камер, панели управления только по HTTP без HTTPS, FTP и MQTT без шифрования. Все они есть в <a href="report-example.html">примере отчёта</a>.</p>
+  </section>
+
+  <section id="what">
+    <h2>Что делает Cyber-Shield</h2>
+    <ul class="cards">
+      <li class="card"><h3>Находит устройства</h3><p>Определяет устройства в своей подсети, их открытые сервисы и производителя по MAC-адресу.</p></li>
+      <li class="card"><h3>Сверяет с базой рисков</h3><p>База из 28 типовых рисков домашних устройств со ссылками на CVE, БДУ ФСТЭК и OWASP.</p></li>
+      <li class="card"><h3>Объясняет простым языком</h3><p>К каждой проблеме — уровень (высокий, средний, низкий) и шаги «что сделать».</p></li>
+      <li class="card"><h3>Не выходит за границы</h3><p>Не входит на устройства, не подбирает пароли и ничего не отправляет в интернет.</p></li>
+    </ul>
+  </section>
+
+  <section id="how">
+    <h2>Как это работает</h2>
+    <ol class="flow">
+      <li><b>Своя подсеть</b><span>Определяет подсеть компьютера и отказывается работать с чужими и публичными адресами.</span></li>
+      <li><b>Поиск устройств</b><span>Находит устройства, открытые сервисы и производителя по MAC-адресу.</span></li>
+      <li><b>Сверка с базой</b><span>Сверяет находки с базой из 28 рисков со ссылками на CVE, БДУ ФСТЭК и OWASP.</span></li>
+      <li><b>HTML-отчёт</b><span>Собирает отчёт: «светофор» по устройствам и пошаговые советы простым языком.</span></li>
+    </ol>
+    <p class="mt">Перед началом проверка спрашивает подтверждение, а после — показывает, у каких устройств всё в порядке.</p>
+    <figure class="mt">
+      <a class="zoom" href="demo.gif" data-lightbox="demo" aria-label="Открыть демо-запись на весь экран">
+        <img src="demo.gif" width="1100" height="700" decoding="async" alt="Демо-запись: заглавный экран Cyber-Shield, запуск проверки из консоли, светофор в терминале, HTML-отчёт, результат после исправления и графики">
+        <span class="zoom-tag">Увеличить</span>
+      </a>
+      <figcaption>Демо-запись, 29 с: заглавный экран, запуск из консоли, «светофор» в терминале, HTML-отчёт, результат после исправления и графики.</figcaption>
+    </figure>
+  </section>
+
+  <section id="report">
+    <h2>Пример отчёта</h2>
+    <div class="shots-2">
+      <figure>
+        <a class="zoom" href="cover.png" data-lightbox="cover" aria-label="Открыть скриншот отчёта до исправления на весь экран">
+          <img src="cover.png" width="1280" height="1600" loading="lazy" decoding="async" alt="Отчёт до исправления: 6 устройств «срочно», 6 «поправить», 8 «в порядке»; у роутера раскрыт риск «Открыт Telnet»">
+          <span class="zoom-tag">Увеличить</span>
+        </a>
+        <figcaption>До исправления: 6 устройств «срочно», 6 «поправить», 8 «в порядке». У роутера раскрыт риск «Открыт Telnet».</figcaption>
+      </figure>
+      <figure>
+        <a class="zoom" href="after.png" data-lightbox="after" aria-label="Открыть скриншот отчёта после исправления на весь экран">
+          <img src="after.png" width="1280" height="1600" loading="lazy" decoding="async" alt="Отчёт после исправления: все 20 устройств «в порядке», у роутера остались только порты 80 и 443">
+          <span class="zoom-tag">Увеличить</span>
+        </a>
+        <figcaption>После исправления: все 20 устройств «в порядке», у роутера остались только порты 80 и 443.</figcaption>
+      </figure>
+    </div>
+    <p class="mt"><a class="btn" href="report-example.html">Открыть пример отчёта целиком</a></p>
+    <p><small>Адреса условные: это учебный стенд.</small></p>
+  </section>
+
+  <section id="result">
+    <h2>Результат на учебном стенде (20 виртуальных устройств)</h2>
+    <ul class="stats">
+      <li class="stat"><span class="num">92,9 %</span><small>найдено заложенных проблем (26 из 28), цель ≥ 90 %</small></li>
+      <li class="stat"><span class="num">13 с</span><small>проверка 20 устройств, цель — меньше 5 мин</small></li>
+      <li class="stat"><span class="num">20 / 20</span><small>устройств «зелёные» после исправления</small></li>
+    </ul>
+    <figure class="mt">
+      <a class="zoom" href="chart.png" data-lightbox="chart" aria-label="Открыть графики на весь экран">
+        <img src="chart.png" width="2100" height="690" loading="lazy" decoding="async" alt="Три графика: светофор 20 устройств до и после исправления, доля найденных проблем 92,9 % и 100 %, время проверки 13 с при пределе 300 с">
+        <span class="zoom-tag">Увеличить</span>
+      </a>
+      <figcaption>Графики со стенда: «светофор» 20 устройств до и после исправления (6 красных, 6 жёлтых, 8 зелёных → 20 зелёных); доля найденных проблем — 92,9 % от 28 заложенных и 100 % от 26 видимых по сети; время проверки — 13 с при пределе 300 с.</figcaption>
+    </figure>
+    <p class="mt"><small>Стенд виртуальный (эмулятор сервисов на этом же компьютере). Проверка на реальном оборудовании и на пользователях без технической подготовки ещё впереди.</small></p>
+  </section>
+
+  <section id="stack">
+    <h2>Стек</h2>
+    <ul class="facts">
+      <li><b>Сканер.</b> Запускается из консоли одной командой; в демо-режиме берёт записанный паспорт учебного стенда, поэтому адреса в примере условные.</li>
+      <li><b>База рисков.</b> 28 типовых проблем; у каждой — ссылки на CVE, БДУ ФСТЭК или OWASP.</li>
+      <li><b>Отчёт.</b> Обычный HTML-файл: «светофор», шаги «что сделать» и галочки «проверьте сами», которые сохраняются в браузере.</li>
+      <li><b>Сайт.</b> Статические HTML, CSS и JavaScript — без сборщика и без внешних библиотек.</li>
+    </ul>
+    <p><small>Команда из демо-записи:</small></p>
+    <pre class="cmd"><code>python run.py demo</code></pre>
+    <!-- Уточнить у команды: версия Python и зависимости сканера для раздела «Стек» -->
+  </section>
+</main>
+
+<footer>
+  <p>Cyber-Shield — учебный проект программы «Сириус.Лето» 2026/27. Проверяйте только свою сеть.</p>
+  <p><a href="report-example.html">Пример отчёта</a> · <a href="https://github.com/sirius-leto-2026/cyber-shield">Исходники на GitHub</a> · <a href="#top">↑ Наверх</a></p>
+</footer>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title" hidden>
+  <div class="lb-bar">
+    <p class="lb-title" id="lb-title"></p>
+    <div class="lb-actions">
+      <button type="button" class="lb-btn" id="lb-zoom" aria-pressed="false">Масштаб 1:1</button>
+      <button type="button" class="lb-btn" id="lb-close">Закрыть ✕</button>
+    </div>
+  </div>
+  <div class="lb-body" id="lb-body">
+    <img class="lb-img" id="lb-img" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  </div>
+</div>
+
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  var lbBody = document.getElementById('lb-body');
+  var lbImg = document.getElementById('lb-img');
+  var lbTitle = document.getElementById('lb-title');
+  var zoomBtn = document.getElementById('lb-zoom');
+  var closeBtn = document.getElementById('lb-close');
+  var opener = null;
+
+  function setZoom(on) {
+    lbBody.classList.toggle('actual', on);
+    zoomBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    lbBody.scrollTop = 0;
+    lbBody.scrollLeft = 0;
+  }
+
+  function open(link) {
+    var pic = link.querySelector('img');
+    var fig = link.closest('figure');
+    var cap = fig ? fig.querySelector('figcaption') : null;
+    lbImg.src = link.getAttribute('href');
+    lbImg.alt = pic ? pic.alt : '';
+    lbTitle.textContent = cap ? cap.textContent : (pic ? pic.alt : '');
+    lb.hidden = false;
+    document.body.classList.add('lb-open');
+    opener = link;
+    setZoom(false);
+    closeBtn.focus();
+  }
+
+  function close() {
+    lb.hidden = true;
+    lbImg.removeAttribute('src');
+    document.body.classList.remove('lb-open');
+    setZoom(false);
+    if (opener) opener.focus();
+  }
+
+  document.querySelectorAll('a[data-lightbox]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      open(link);
+    });
+  });
+  zoomBtn.addEventListener('click', function () {
+    setZoom(!lbBody.classList.contains('actual'));
+  });
+  closeBtn.addEventListener('click', close);
+  lbImg.addEventListener('click', function () {
+    setZoom(!lbBody.classList.contains('actual'));
+  });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    var order = [zoomBtn, closeBtn];
+    var i = order.indexOf(document.activeElement);
+    e.preventDefault();
+    order[(i + (e.shiftKey ? -1 : 1) + order.length) % order.length].focus();
+  });
+})();
+</script>
+</body>
+</html>
