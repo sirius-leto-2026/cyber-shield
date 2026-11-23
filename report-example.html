@@ -4,24 +4,64 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Отчёт безопасности — Cyber-Shield</title>
+<meta name="description" content="Пример отчёта Cyber-Shield: 20 устройств домашней сети, светофор «срочно / поправить / в порядке» и шаги «что сделать» по каждой проблеме.">
+<meta name="theme-color" content="#13233f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2313233f'/%3E%3Cpath d='M16 5l8 3v7c0 5.2-3.4 9.3-8 11-4.6-1.7-8-5.8-8-11V8z' fill='%23e7eefc'/%3E%3Cpath d='M12.2 16.4l2.7 2.7 5.2-5.6' stroke='%2313233f' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Cyber-Shield">
+<meta property="og:title" content="Отчёт безопасности домашней сети — Cyber-Shield">
+<meta property="og:description" content="Пример отчёта Cyber-Shield: 20 устройств домашней сети, светофор «срочно / поправить / в порядке» и шаги «что сделать» по каждой проблеме.">
+<meta property="og:url" content="https://sirius-leto-2026.github.io/cyber-shield/report-example.html">
+<meta property="og:image" content="https://sirius-leto-2026.github.io/cyber-shield/after.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="1600">
+<meta property="og:image:alt" content="Отчёт Cyber-Shield после исправления: все 20 устройств в порядке">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-:root { --navy:#13233f; --cyan:#076a86; --ink:#18202c; --muted:#4f5968; --line:#d3e1ea; --bg:#f4f7fa;
+:root { --navy:#13233f; --cyan:#076a86; --link:#1f4fbf; --ink:#18202c; --muted:#4f5968; --line:#d3e1ea; --bg:#f4f7fa; --card:#fff; --r:10px;
         --red:#b3261e; --red-bg:#fdecea; --yel:#8a5a00; --yel-bg:#fff4d6; --grn:#17663f; --grn-bg:#e5f5ec; }
 * { box-sizing: border-box; }
-body { margin:0; font-family:"Segoe UI", Arial, sans-serif; color:var(--ink); background:var(--bg); line-height:1.45; font-size:16px; }
+html { scroll-behavior: smooth; }
+body { margin:0; font-family:"Segoe UI", system-ui, Arial, sans-serif; color:var(--ink); background:var(--bg); line-height:1.55; font-size:16px; }
+a { color:var(--link); text-underline-offset:2px; }
+a:hover { text-decoration:none; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid var(--cyan); outline-offset:2px; border-radius:4px; }
+code { font-family:Consolas, ui-monospace, "Courier New", monospace; font-size:.94em; }
+.topbar { position:sticky; top:0; z-index:30; background:var(--navy); }
+.topbar .in { display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:980px; margin:0 auto; padding:7px 16px; }
+.back { color:#dbe7f8; text-decoration:none; font-size:14px; padding:4px 11px; border:1px solid #ffffff40; border-radius:999px; white-space:nowrap; }
+.back:hover { background:#ffffff1f; }
+.topbar-tag { font-size:13px; color:#a8bfdc; }
+.progress { height:3px; background:#ffffff26; }
+.progress i { display:block; height:100%; width:0; background:#4cc2e8; }
 header { background:var(--navy); color:#fff; padding:22px 16px; }
 header .in, main { max-width:980px; margin:0 auto; }
-header h1 { margin:0 0 4px; font-size:26px; }
-header p { margin:0; color:#cfe9f3; }
+header h1 { margin:0 0 4px; font-size:clamp(21px,4.6vw,26px); line-height:1.2; }
+header p { margin:0; color:#cfe9f3; font-size:15px; }
 main { padding:16px; }
-h2 { color:var(--navy); margin:28px 0 10px; font-size:21px; }
+h2 { color:var(--navy); margin:30px 0 10px; font-size:21px; line-height:1.25; }
+h2:first-of-type { margin-top:16px; }
+h2, .dev { scroll-margin-top:64px; }
+.toc { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 6px; }
+.toc a { display:inline-block; font-size:14px; text-decoration:none; padding:6px 12px; border-radius:999px; background:var(--card); border:1px solid var(--line); color:var(--navy); }
+.toc a:hover { border-color:var(--cyan); color:var(--link); }
 .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
-.tile { background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; }
+.tile { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:10px 14px; }
 .tile b { display:block; font-size:28px; color:var(--navy); }
 .tile.r { border-left:6px solid var(--red); } .tile.y { border-left:6px solid #d98a00; } .tile.g { border-left:6px solid var(--grn); }
-.passport { background:#fff; border:1px solid var(--line); border-left:6px solid var(--cyan); border-radius:8px; padding:12px 16px; margin-top:12px; }
-.dev { background:#fff; border:1px solid var(--line); border-radius:8px; margin:12px 0; overflow:hidden; }
+.tbl-wrap { overflow-x:auto; margin:12px 0 16px; border:1px solid var(--line); border-radius:var(--r); background:var(--card); }
+.tbl-wrap table { width:100%; border-collapse:collapse; font-size:15px; }
+caption { caption-side:top; text-align:left; font-weight:700; color:var(--navy); padding:11px 14px; border-bottom:1px solid var(--line); }
+th, td { text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+thead th { background:#eef4f9; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+tbody th { font-weight:600; color:var(--muted); white-space:nowrap; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom:none; }
+td.num { white-space:nowrap; font-variant-numeric:tabular-nums; }
+.tbl-wrap .badge { margin-left:0; }
+.dev { background:var(--card); border:1px solid var(--line); border-radius:var(--r); margin:12px 0; overflow:hidden; }
 .dev-h { display:flex; gap:14px; align-items:center; padding:12px 16px; flex-wrap:wrap; }
+.dev-h > div { flex:1 1 0; min-width:0; }
 .light { width:22px; height:22px; border-radius:50%; flex:none; }
 .light.red { background:var(--red); } .light.yellow { background:#e0a100; } .light.green { background:#23a35a; }
 .dev-h .t { font-weight:700; font-size:18px; color:var(--navy); }
@@ -32,28 +72,73 @@ h2 { color:var(--navy); margin:28px 0 10px; font-size:21px; }
 .ports code { background:var(--bg); padding:1px 6px; border-radius:4px; color:var(--ink); }
 .risk { border-top:1px solid var(--line); padding:10px 16px; }
 .risk summary { cursor:pointer; font-weight:600; }
-.risk summary:focus-visible, input:focus-visible { outline:3px solid var(--cyan); outline-offset:2px; }
 .lvl { font-size:12px; font-weight:700; padding:2px 7px; border-radius:4px; margin-right:6px; }
 .lvl.high { background:var(--red-bg); color:var(--red); } .lvl.medium { background:var(--yel-bg); color:var(--yel); } .lvl.low { background:var(--grn-bg); color:var(--grn); }
 .risk ol { margin:6px 0; padding-left:22px; }
 .refs { font-size:13px; color:var(--muted); }
-.refs a { color:var(--cyan); }
-.check { background:#fff; border:1px solid var(--line); border-radius:8px; padding:4px 16px; }
+.refs a { color:var(--link); }
+.check { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:4px 16px; }
 .check .q { border-bottom:1px solid var(--line); padding:10px 0; }
 .check .q:last-child { border-bottom:none; }
 .check label { display:flex; gap:10px; align-items:flex-start; font-weight:600; cursor:pointer; }
 .check input { width:20px; height:20px; margin-top:3px; flex:none; }
 .check details { margin:4px 0 0 30px; font-size:15px; }
-footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px; color:var(--muted); }
-@media print { body { background:#fff; } details { display:block; } details > *:not(summary) { display:block; } }
+.check-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin:0 0 12px; }
+.check-status { margin:0; font-size:14px; color:var(--muted); }
+.btn-reset { background:var(--card); border:1px solid var(--line); color:var(--navy); font:inherit; font-size:14px; padding:7px 14px; border-radius:999px; cursor:pointer; }
+.btn-reset:hover { border-color:var(--cyan); color:var(--link); }
+footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px; line-height:1.6; color:var(--muted); }
+footer p { margin:0 0 6px; }
+@media (max-width:520px) {
+  .topbar .in { padding:6px 12px; }
+  .topbar-tag { display:none; }
+  main { padding:12px; }
+  h2 { font-size:19px; margin-top:26px; }
+  .tile b { font-size:24px; }
+  .dev-h { gap:10px; padding:12px; }
+  .ports { padding:0 12px 10px; }
+  .risk { padding:10px 12px; }
+  .check { padding:4px 12px; }
+  .check details { margin-left:0; }
+  .tbl-wrap table { font-size:14px; }
+  .tbl-wrap th, .tbl-wrap td { padding:8px 10px; }
+}
+@media print {
+  body { background:#fff; }
+  .topbar, .toc { display:none !important; }
+  details { display:block; }
+  details > *:not(summary) { display:block; }
+  .tbl-wrap { overflow:visible; }
+  .tbl-wrap table { min-width:0; }
+  h2, .dev { scroll-margin-top:0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after { animation:none !important; transition:none !important; }
+}
 </style>
 </head>
 <body>
+<div class="topbar" id="top">
+  <div class="in">
+    <a class="back" href="index.html">← К проекту</a>
+    <span class="topbar-tag">Пример отчёта · Cyber-Shield</span>
+  </div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+</div>
 <header><div class="in">
   <h1>Отчёт безопасности домашней сети</h1>
   <p>Cyber-Shield · сеть 127.42.0.0/27 · 18.11.2026 14:01 · проверка заняла 13.0 с</p>
 </div></header>
 <main>
+  <nav class="toc" aria-label="Содержание отчёта">
+    <a href="#summary">Сводка</a>
+    <a href="#urgent">Что чинить первым</a>
+    <a href="#devices">Устройства</a>
+    <a href="#checklist">Проверьте сами</a>
+  </nav>
+
+  <h2 id="summary">Сводка проверки</h2>
   <div class="tiles" role="list">
     <div class="tile" role="listitem"><b>20</b>устройств найдено</div>
     <div class="tile r" role="listitem"><b>6</b>требуют срочных мер</div>
@@ -61,18 +146,53 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     <div class="tile g" role="listitem"><b>8</b>в порядке</div>
   </div>
 
-  
-  <div class="passport">
-    <b>Проверка на учебном стенде:</b> заложено проблем — 28, найдено — 26
-    (93 %).
-    Цель «не менее 90 %» достигнута.
-    <br>Пропущено: 127.42.0.10 (M01), 127.42.0.10 (M03)
+  <div class="tbl-wrap">
+    <table>
+      <caption>Светофор: что означает цвет устройства</caption>
+      <thead><tr><th scope="col">Сигнал</th><th scope="col">Что означает</th><th scope="col" class="num">Устройств</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge red">Срочно</span></td><td>Есть риск высокого уровня — исправлять первым</td><td class="num">6</td></tr>
+        <tr><td><span class="badge yellow">Поправить</span></td><td>Есть риски среднего уровня, высоких нет</td><td class="num">6</td></tr>
+        <tr><td><span class="badge green">В порядке</span></td><td>Только замечания низкого уровня или ничего не найдено</td><td class="num">8</td></tr>
+      </tbody>
+    </table>
   </div>
-  
 
-  <h2>Устройства</h2>
+  <div class="tbl-wrap two">
+    <table>
+      <caption>Паспорт проверки: учебный стенд</caption>
+      <tbody>
+        <tr><th scope="row">Сеть</th><td><code>127.42.0.0/27</code> — только подсеть, к которой подключён компьютер</td></tr>
+        <tr><th scope="row">Дата и время</th><td>18.11.2026, 14:01</td></tr>
+        <tr><th scope="row">Длительность</th><td>13.0 с</td></tr>
+        <tr><th scope="row">Устройств найдено</th><td>20</td></tr>
+        <tr><th scope="row">Заложено проблем</th><td>28</td></tr>
+        <tr><th scope="row">Найдено</th><td>26 (93 %), цель «не менее 90 %» достигнута</td></tr>
+        <tr><th scope="row">Пропущено</th><td><code>127.42.0.10</code> (M01), <code>127.42.0.10</code> (M03)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="urgent">Что чинить первым</h2>
+  <p>Шесть устройств с красным сигналом — у каждого есть хотя бы один риск высокого уровня. Ниже в отчёте у них раскрыты шаги «что сделать».</p>
+  <div class="tbl-wrap">
+    <table>
+      <caption>Устройства с риском высокого уровня</caption>
+      <thead><tr><th scope="col">Устройство</th><th scope="col">IP-адрес</th><th scope="col">Риск высокого уровня</th></tr></thead>
+      <tbody>
+        <tr><td><a href="#dev-10">Роутер</a></td><td><code>127.42.0.10</code></td><td>Открыт Telnet</td></tr>
+        <tr><td><a href="#dev-13">Устройство SHENZHEN BILIAN ELECTRONIC</a></td><td><code>127.42.0.13</code></td><td>Открыт Telnet на нестандартном порту 2323</td></tr>
+        <tr><td><a href="#dev-16">Одноплатный компьютер</a></td><td><code>127.42.0.16</code></td><td>Открыт удалённый экран VNC</td></tr>
+        <tr><td><a href="#dev-17">ТВ-приставка / Android</a></td><td><code>127.42.0.17</code></td><td>Открыта отладка Android по сети (ADB)</td></tr>
+        <tr><td><a href="#dev-23">Компьютер</a></td><td><code>127.42.0.23</code></td><td>Открыт удалённый экран VNC</td></tr>
+        <tr><td><a href="#dev-27">Роутер / точка доступа</a></td><td><code>127.42.0.27</code></td><td>Открыт Telnet</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="devices">Устройства</h2>
   
-  <section class="dev" aria-label="Устройство 127.42.0.10">
+  <section class="dev" id="dev-10" aria-label="Устройство 127.42.0.10">
     <div class="dev-h">
       <span class="light red" role="img" aria-label="красный сигнал"></span>
       <div>
@@ -136,7 +256,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.11">
+  <section class="dev" id="dev-11" aria-label="Устройство 127.42.0.11">
     <div class="dev-h">
       <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
       <div>
@@ -176,7 +296,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.12">
+  <section class="dev" id="dev-12" aria-label="Устройство 127.42.0.12">
     <div class="dev-h">
       <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
       <div>
@@ -216,7 +336,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.13">
+  <section class="dev" id="dev-13" aria-label="Устройство 127.42.0.13">
     <div class="dev-h">
       <span class="light red" role="img" aria-label="красный сигнал"></span>
       <div>
@@ -256,7 +376,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.14">
+  <section class="dev" id="dev-14" aria-label="Устройство 127.42.0.14">
     <div class="dev-h">
       <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
       <div>
@@ -288,7 +408,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.15">
+  <section class="dev" id="dev-15" aria-label="Устройство 127.42.0.15">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -312,7 +432,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.16">
+  <section class="dev" id="dev-16" aria-label="Устройство 127.42.0.16">
     <div class="dev-h">
       <span class="light red" role="img" aria-label="красный сигнал"></span>
       <div>
@@ -352,7 +472,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.17">
+  <section class="dev" id="dev-17" aria-label="Устройство 127.42.0.17">
     <div class="dev-h">
       <span class="light red" role="img" aria-label="красный сигнал"></span>
       <div>
@@ -376,7 +496,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.18">
+  <section class="dev" id="dev-18" aria-label="Устройство 127.42.0.18">
     <div class="dev-h">
       <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
       <div>
@@ -408,7 +528,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.19">
+  <section class="dev" id="dev-19" aria-label="Устройство 127.42.0.19">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -440,7 +560,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.20">
+  <section class="dev" id="dev-20" aria-label="Устройство 127.42.0.20">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -456,7 +576,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.21">
+  <section class="dev" id="dev-21" aria-label="Устройство 127.42.0.21">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -472,7 +592,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.22">
+  <section class="dev" id="dev-22" aria-label="Устройство 127.42.0.22">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -496,7 +616,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.23">
+  <section class="dev" id="dev-23" aria-label="Устройство 127.42.0.23">
     <div class="dev-h">
       <span class="light red" role="img" aria-label="красный сигнал"></span>
       <div>
@@ -528,7 +648,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.24">
+  <section class="dev" id="dev-24" aria-label="Устройство 127.42.0.24">
     <div class="dev-h">
       <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
       <div>
@@ -560,7 +680,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.25">
+  <section class="dev" id="dev-25" aria-label="Устройство 127.42.0.25">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -584,7 +704,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.26">
+  <section class="dev" id="dev-26" aria-label="Устройство 127.42.0.26">
     <div class="dev-h">
       <span class="light yellow" role="img" aria-label="жёлтый сигнал"></span>
       <div>
@@ -616,7 +736,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.27">
+  <section class="dev" id="dev-27" aria-label="Устройство 127.42.0.27">
     <div class="dev-h">
       <span class="light red" role="img" aria-label="красный сигнал"></span>
       <div>
@@ -656,7 +776,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.28">
+  <section class="dev" id="dev-28" aria-label="Устройство 127.42.0.28">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -672,7 +792,7 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
     
   </section>
   
-  <section class="dev" aria-label="Устройство 127.42.0.29">
+  <section class="dev" id="dev-29" aria-label="Устройство 127.42.0.29">
     <div class="dev-h">
       <span class="light green" role="img" aria-label="зелёный сигнал"></span>
       <div>
@@ -697,8 +817,12 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
   </section>
   
 
-  <h2>Проверьте сами (программа это не проверяет)</h2>
+  <h2 id="checklist">Проверьте сами (программа это не проверяет)</h2>
   <p>Cyber-Shield никогда не пытается войти на устройства. Ответьте на вопросы — отметки сохраняются в этом браузере.</p>
+  <div class="check-top">
+    <p class="check-status" id="check-status" role="status" aria-live="polite"></p>
+    <button type="button" class="btn-reset" id="reset-checks">Сбросить отметки</button>
+  </div>
   <div class="check">
     
     <div class="q">
@@ -776,15 +900,63 @@ footer { max-width:980px; margin:24px auto; padding:0 16px 30px; font-size:13px;
   </div>
 </main>
 <footer>
-  Отчёт создан на этом компьютере и никуда не отправлялся. Проверялась только подсеть 127.42.0.0/27, к которой подключён компьютер.
-  Cyber-Shield не заменяет профессиональный аудит: база рисков покрывает типовые проблемы популярных устройств.
+  <p>Отчёт создан на этом компьютере и никуда не отправлялся. Проверялась только подсеть 127.42.0.0/27, к которой подключён компьютер.</p>
+  <p>Cyber-Shield не заменяет профессиональный аудит: база рисков покрывает типовые проблемы популярных устройств.</p>
+  <p><a href="index.html">← Вернуться к проекту</a> · <a href="#top">↑ Наверх</a></p>
 </footer>
 <script>
-document.querySelectorAll('.check input').forEach(function (cb) {
-  var key = 'cyber-shield:' + cb.dataset.id;
-  try { cb.checked = localStorage.getItem(key) === '1'; } catch (e) {}
-  cb.addEventListener('change', function () { try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch (e) {} });
-});
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.check input'));
+  var status = document.getElementById('check-status');
+  var reset = document.getElementById('reset-checks');
+
+  function updateStatus() {
+    if (!status) return;
+    var n = boxes.filter(function (cb) { return cb.checked; }).length;
+    status.textContent = 'Отмечено ' + n + ' из ' + boxes.length;
+  }
+
+  boxes.forEach(function (cb) {
+    var key = 'cyber-shield:' + cb.dataset.id;
+    try { cb.checked = localStorage.getItem(key) === '1'; } catch (e) {}
+    cb.addEventListener('change', function () {
+      try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch (e) {}
+      updateStatus();
+    });
+  });
+  updateStatus();
+
+  if (reset) {
+    reset.addEventListener('click', function () {
+      boxes.forEach(function (cb) {
+        cb.checked = false;
+        try { localStorage.removeItem('cyber-shield:' + cb.dataset.id); } catch (e) {}
+      });
+      updateStatus();
+    });
+  }
+
+  var bar = document.getElementById('progress');
+  if (bar) {
+    var ticking = false;
+    function draw() {
+      var de = document.documentElement;
+      var max = de.scrollHeight - de.clientHeight;
+      var top = window.pageYOffset || de.scrollTop || 0;
+      var pct = max > 0 ? Math.min(100, Math.max(0, top / max * 100)) : 0;
+      bar.style.width = pct.toFixed(1) + '%';
+      ticking = false;
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(draw);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    draw();
+  }
+})();
 </script>
 </body>
 </html>
